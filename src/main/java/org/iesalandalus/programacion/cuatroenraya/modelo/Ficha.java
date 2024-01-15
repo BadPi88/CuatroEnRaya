@@ -4,6 +4,6 @@ public enum Ficha { VERDE,AZUL;
 
     @Override
     public String toString() {
-        return String.format(String.valueOf(name().charAt(0)));
+        return String.valueOf(name().charAt(0));
     }
 }
