@@ -25,10 +25,7 @@ public class Casilla {
 
     public boolean estaOcupada() {
 
-        if (ficha != null) {
-            return true;
-        }
-        return false;
+        return ficha != null;
     }
 
     @Override
