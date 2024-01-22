@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.cuatroenraya.modelo;
 
 import javax.naming.OperationNotSupportedException;
+import java.util.Arrays;
 
 public class Tablero {
     public static final int FILAS = 6;
@@ -37,7 +38,6 @@ public class Tablero {
     public boolean columnaLlena(int columna) {
         for (int filaActual = 0; filaActual < COLUMNAS; filaActual++) {
             if (!casillas[filaActual][columna].estaOcupada()) {
-                return false;
             }
         }
         return true;
@@ -47,7 +47,6 @@ public class Tablero {
 
         for (int columnaActual = 0; columnaActual < COLUMNAS; columnaActual++) {
             columnaLlena(columnaActual);
-
             if (columnaLlena(columnaActual)) {
                 return true;
             }
@@ -160,22 +159,49 @@ public class Tablero {
     }
 
     public boolean introducirFicha(int columna, Ficha ficha) throws IllegalArgumentException, OperationNotSupportedException {
+        if (ficha == null) {
+            throw new NullPointerException("La ficha no puede ser nula.");
+        }
 
 
         if (columna < 0 || columna >= COLUMNAS) {
-            throw new IllegalArgumentException("Columna no válida. Debe estar entre 0 y " + (COLUMNAS - 1));
+            throw new IllegalArgumentException("Columna incorrecta.");
         }
 
         int fila = getPrimeraFilaVacia(columna);
 
-        if (fila == -1) {
-            throw new OperationNotSupportedException("La columna " + columna + " está llena. Elige otra columna.");
+        if (fila < 0 || fila >= FILAS) {
+            throw new OperationNotSupportedException("Fila incorrecta.");
         }
         casillas[fila][columna].setFicha(ficha);
 
-        return objetivoAlcanzado(fila);
+        return comprobarTirada(fila,columna,ficha);
     }
+/* values() devuelve un array de los valores de un enum
+* Palo[] palos = Palo.values()
+* Para devolver el array???
+* para generar una carta de un palo random:
+* Palo palo = palo[generator.next.int(palos.lenght)]*/
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
 
+        for (int i = 0; i < FILAS; i++) {
+
+            stringBuilder.append("|");
+            for (int j = 0; j < COLUMNAS; j++) {
+                if (casillas[i][j] != null && casillas[i][j].estaOcupada()) {
+                    stringBuilder.append(casillas[i][j].toString());
+                } else
+                    stringBuilder.append(" ");
+            }
+            stringBuilder.append("|\n");
+
+        }
+        stringBuilder.append(" -------\n");
+
+        return stringBuilder.toString();
+    }
 }
 
 
