@@ -1,6 +1,8 @@
 package org.iesalandalus.programacion.cuatroenraya.modelo;
 
-public enum Ficha { VERDE,AZUL;
+public enum Ficha {
+    AZUL,
+    VERDE;
 
     @Override
     public String toString() {
