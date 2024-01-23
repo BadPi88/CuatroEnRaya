@@ -11,9 +11,7 @@ public record Jugador(String nombre, Ficha colorFichas) {
     }
 
     private String validarNombre(String nombre) {
-        if (nombre == null) {
-            throw new NullPointerException("El nombre no puede ser nulo.");
-        }
+        Objects.requireNonNull(nombre, "El nombre no puede ser nulo.");
         if (nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre no puede estar en blanco.");
         }

@@ -18,6 +18,10 @@ public class Casilla {
         if (ficha == null) {
             throw new NullPointerException("No se puede poner una ficha nula.");
         }
+        if (estaOcupada()) {
+            throw new OperationNotSupportedException("La casilla ya contiene una ficha.");
+
+        }
         this.ficha = ficha;
     }
 
