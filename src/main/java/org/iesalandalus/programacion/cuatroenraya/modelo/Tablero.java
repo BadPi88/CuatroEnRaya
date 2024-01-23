@@ -142,7 +142,7 @@ public class Tablero {
             } else {
                 fichaIgualesConsecutivas = 0;
             }
-            if (fichaIgualesConsecutivas >= 4) {
+            if (objetivoAlcanzado(fichaIgualesConsecutivas)) {
                 return true;
             }
         }
